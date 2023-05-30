@@ -121,13 +121,15 @@ body {
     background-color: #19376D;
     background-color: #11110f;
     background-color: #201c1d;
+    width: 100vw;
+    min-height: 80vh;
 }
 
 .corpo_lista{
     display: flex !important;
     justify-content: center;
-    width: 80vw;
-    min-height: 80vh;
+    width: 70vw;
+    min-height: 70vh;
 }
 
 
@@ -136,7 +138,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 60%;
-    height: 60%;
+    height: 70%;
     border: 1px;
     font-size: 24px;
     font-family: 'Courier New', Courier, monospace;
@@ -209,6 +211,12 @@ body {
     box-shadow: 4px 5px 8px 1px grey;  /* #d6af52 */
 }
 
+.btn_active {
+    border: solid 1px aquamarine;
+    color: aquamarine;
+    border-radius: 8px;
+}
+
 .divLogo{
     display: flex;
     justify-content: center;
@@ -218,4 +226,13 @@ body {
     width: 100%;
     height: 150px;
     padding: 2px 0px;
+}
+
+
+
+
+
+
+.BuscarAPI {
+    
 }
