@@ -88,7 +88,27 @@ const controls = {
     }
 }
 
+const list = {
+    create(item) {
+        const div = document.createElement('div')
+        div.classList.add('item')
+        div.innerHTML = item
 
+        html.get('.list').appendChild(div)
+    },
+    update() {
+        html.get('.list').innerHTML = ""
+
+        let page = state.page - 1  // inicializando page = 0
+        let start = page * state.perPage  // lógica para calcular o valor de inicio do slice
+        let end = start + state.perPage     // lógica para calcular o valor do final do slice
+        //console.log(data.slice(start, end))
+        
+        const paginatedItems = data.slice(start, end)
+
+        paginatedItems.forEach(list.create)
+    }
+}
 
 const buttons = {
     create(number) {
@@ -139,6 +159,10 @@ const buttons = {
     }
 }
 
+
+
+
+
 function update() {
     list.update()
     buttons.update()
@@ -146,8 +170,8 @@ function update() {
 }
 
 function init() {
-    update()
+    update()  // inicializando a function update()
     controls.createListeners()
 }
 
-init()
+init()   // inicializando a function init()

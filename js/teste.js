@@ -9,6 +9,7 @@ async function buscarApi(){
 async function init() {
 
     let data = await buscarApi();
+    //console.log(data)
 
     const html = {
         get(element) {
@@ -17,14 +18,126 @@ async function init() {
     }
     
     let perPage = 10
+    const state = {
+        page: 1,
+        perPage,
+        totalPage: Math.ceil(data.length / perPage),
+        maxVisibleButtons: 5
+    }
+
+    const controls = {
+        next() {
+            state.page++
+    
+            if(state.page > state.totalPage) {
+                state.page--
+            }
+        },
+        prev() {
+            state.page--
+    
+            if(state.page < 1) {
+                state.page++
+            }
+    
+        },
+        goTo(page) {
+            if (page < 1) {
+                page = 1
+            }
+    
+            state.page = +page  // +page tansforma page em um numero
+    
+            if(page > state.totalPage) {
+                state.page = state.totalPage
+            }
+        },
+
+        createListeners(){
+            html.get('.first').addEventListener('click', () => {
+                controls.goTo(1)
+                update()
+            } )
+    
+            html.get('.last').addEventListener('click', () => {
+                controls.goTo(state.totalPage)
+                update()
+            } )
+    
+            html.get('.next').addEventListener('click', () => {
+                controls.next()
+                update()
+            } )
+    
+            html.get('.prev').addEventListener('click', () => {
+                controls.prev()
+                update()
+            } )
+        }
+    }
     
     const list = {
+        //const div = document.createElement('div')
         create(item) {
-            const div = document.createElement('div')
-            div.classList.add('item')
-            div.innerHTML = item
-    
-            html.get('.list').appendChild(div)
+            // let acao = {
+            //     nome: item.name,
+            //     stock: item.stock,
+            //     close: item.close,
+            //     logo: item.logo
+            // }
+            // const div = document.createElement('div')
+            // div.classList.add('item')
+            // div.innerHTML = acao
+
+            const li = document.createElement('div')    //const li = document.createElement('li');
+            const divLogo = document.createElement('div')
+            const image = document.createElement('img')
+            const stock = document.createElement('h2')
+            const spanNome = document.createElement('h4')
+            const sector = document.createElement('span')
+            const close = document.createElement('h2')
+            const change = document.createElement('h5')
+            const market_cap = document.createElement('span')
+            const volume = document.createElement('span')
+
+            li.classList.add('item')
+            
+            //li.setAttribute('id', item.id);
+            image.setAttribute('class', "logo")
+            divLogo.setAttribute('class', "divLogo")
+            li.setAttribute('class', "card_item")
+
+            image.src = item.logo
+            divLogo.appendChild(image) 
+
+            stock.innerHTML = `stock: ${item.stock}`
+            spanNome.innerHTML = item.name
+            sector.innerHTML = item.sector
+            close.innerHTML = `close: ${item.close}`
+            change.innerHTML = `change: ${item.change}`
+            market_cap.innerHTML = `market_cap: ${item.market_cap}</br>`
+            volume.innerHTML = `volume: ${item.volume}`
+
+            li.appendChild(divLogo)
+            li.appendChild(stock)
+            li.appendChild(spanNome)
+            li.appendChild(sector)
+            li.appendChild(close)
+            li.appendChild(change)
+            li.appendChild(market_cap)
+            li.appendChild(volume)
+            // li.style.backgroundImage = `url(${item.logo})`
+            // li.style.backgroundSize = "cover"
+            // li.style.position = "relative"
+            // li.style.opacity = 0.8
+            //list.appendChild(li)  //.style(`background-image: ${item.logo}`)
+
+            // const corpo = document.createElement("div")
+            // li.setAttribute('class', "card_item")
+            // corpo.style.color = "red"
+            // corpo.appendChild(li)
+
+            html.get('.list').appendChild(li)
         },
         update() {
             html.get('.list').innerHTML = ""
@@ -89,63 +202,6 @@ async function init() {
         }
     }
 
-    const state = {
-        page: 1,
-        perPage,
-        totalPage: Math.ceil(data.length / perPage),
-        maxVisibleButtons: 5
-    }
-
-    const controls = {
-        next() {
-            state.page++
-    
-            if(state.page > state.totalPage) {
-                state.page--
-            }
-        },
-        prev() {
-            state.page--
-    
-            if(state.page < 1) {
-                state.page++
-            }
-    
-        },
-        goTo(page) {
-            if (page < 1) {
-                page = 1
-            }
-    
-            state.page = +page  // +page tansforma page em um numero
-    
-            if(page > state.totalPage) {
-                state.page = state.totalPage
-            }
-        },
-
-        createListeners(){
-            html.get('.first').addEventListener('click', () => {
-                controls.goTo(1)
-                update()
-            } )
-    
-            html.get('.last').addEventListener('click', () => {
-                controls.goTo(state.totalPage)
-                update()
-            } )
-    
-            html.get('.next').addEventListener('click', () => {
-                controls.next()
-                update()
-            } )
-    
-            html.get('.prev').addEventListener('click', () => {
-                controls.prev()
-                update()
-            } )
-        }
-    }
 
     const update = () => {
         list.update()
