@@ -23,6 +23,8 @@ function buscarApi(){
     ativo = 2
     ativarBotao();
 
+    const mostrarHome = document.getElementById('box')
+    mostrarHome.style.display = 'none'
     const mostrarBuscaApi = document.getElementById('corpoApi')
     const mostrarBuscaPaginada = document.getElementById('paginate')
     mostrarBuscaApi.style.display = 'flex'
@@ -100,6 +102,9 @@ async function init() {
 
     ativo = 3
     ativarBotao();
+
+    const mostrarHome = document.getElementById('box')
+    mostrarHome.style.display = 'none'
 
     const mostrarBuscaApi = document.getElementById('corpoApi')
     const mostrarBuscaPaginada = document.getElementById('paginate')
@@ -316,35 +321,38 @@ function irHome(){
     ativo = 1
     ativarBotao();
 
+    const mostrarHome = document.getElementById('box')
+    mostrarHome.style.display = 'flex'
+
     const mostrarBuscaApi = document.getElementById('corpoApi')
     const mostrarBuscaPaginada = document.getElementById('paginate')
-    mostrarBuscaApi.style.display = 'flex'
+    mostrarBuscaApi.style.display = 'none'
     mostrarBuscaPaginada.style.display = 'none'
 
     
-    const list = document.getElementById('lista')
-    const home = document.createElement('div')
-    const texto = document.createElement('p')
+    // const list = document.getElementById('lista')
+    // const home = document.createElement('div')
+    // const texto = document.createElement('p')
 
-    const linha = document.createElement('hr')
-    const linha2 = document.createElement('hr')
+    // const linha = document.createElement('hr')
+    // const linha2 = document.createElement('hr')
 
-    texto.setAttribute('class', "texto")
-    home.setAttribute('class', "pag_home")
-    linha.setAttribute('class', "linha")
-    linha2.setAttribute('class', "linha2")
+    // texto.setAttribute('class', "texto")
+    // home.setAttribute('class', "pag_home")
+    // linha.setAttribute('class', "linha")
+    // linha2.setAttribute('class', "linha2")
 
-    home.appendChild(linha)
-    texto.textContent = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    home.style.color  = "#e8a028"
-    home.appendChild(texto)
+    // home.appendChild(linha)
+    // texto.textContent = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    // home.style.color  = "#e8a028"
+    // home.appendChild(texto)
     
 
-    home.appendChild(linha2)
-    home.style.border = "solid 2px #e8a028"
+    // home.appendChild(linha2)
+    // home.style.border = "solid 2px #e8a028"
 
-    list.innerHTML = ""
-    list.appendChild(home)
+    // list.innerHTML = ""
+    // list.appendChild(home)
     
 }
 
