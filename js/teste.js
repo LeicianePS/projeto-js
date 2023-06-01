@@ -9,6 +9,12 @@ botaoAPIPaginacao.onclick = function () {
 };
 
 
+// let detalhe = document.getElementById('detalhe')
+// detalhe.onclick = function () {
+//     init() ;
+// };
+
+
 let ativo = 0
 
 function buscarApi(){
@@ -51,45 +57,85 @@ function buscarApi(){
             const image = document.createElement('img')
             const stock = document.createElement('h2')
             const spanNome = document.createElement('h4')
-            const sector = document.createElement('span')
+            const sector = document.createElement('h4')
             const close = document.createElement('h2')
             const change = document.createElement('h5')
-            const market_cap = document.createElement('span')
-            const volume = document.createElement('span')
+            const market_cap = document.createElement('h5')
+            const volume = document.createElement('h5')
             
+            const divDetalhe = document.createElement('div')
+
             //li.setAttribute('id', item.id);
             image.setAttribute('class', "logo")
             divLogo.setAttribute('class', "divLogo")
             li.setAttribute('class', "card_item")
+            li.setAttribute('id', item.market_cap)
+            divDetalhe.setAttribute('id', item.stock)
 
             image.src = item.logo
             divLogo.appendChild(image) 
-
             stock.innerHTML = `stock: ${item.stock}`
             spanNome.innerHTML = item.name
+
             sector.innerHTML = item.sector
             close.innerHTML = `close: ${item.close}`
             change.innerHTML = `change: ${item.change}`
             market_cap.innerHTML = `market_cap: ${item.market_cap}</br>`
             volume.innerHTML = `volume: ${item.volume}`
 
+
+            divDetalhe.appendChild(sector)
+            divDetalhe.appendChild(close)
+            divDetalhe.appendChild(change)
+            divDetalhe.appendChild(market_cap)
+            divDetalhe.appendChild(volume)
+            
+            divDetalhe.style.display = 'none'
+
             li.appendChild(divLogo)
             li.appendChild(stock)
             li.appendChild(spanNome)
-            li.appendChild(sector)
-            li.appendChild(close)
-            li.appendChild(change)
-            li.appendChild(market_cap)
-            li.appendChild(volume)
+
+            li.appendChild(divDetalhe)
+            li.addEventListener("mouseenter", (e) => {
+                //let elem = document.querySelector('#lista')
+                cardId = e.target.id
+               // console.log(cardId)
+                //let elem = document.querySelector(`#lista #${cardId}`) //.style.display = 'block';
+                let elem = document.getElementById(`${cardId}`)
+               // console.log(elem)
+                detalhe = elem.querySelector(`:nth-child(4)`)
+                //console.log(detalhe)
+                detalhe.style.display = "block";
+            });
+            // li.appendChild(sector)
+            // li.appendChild(close)
+            // li.appendChild(change)
+            // li.appendChild(market_cap)
+            // li.appendChild(volume)
+
+
+
             // li.style.backgroundImage = `url(${item.logo})`
             // li.style.backgroundSize = "cover"
             // li.style.position = "relative"
             // li.style.opacity = 0.8
             list.appendChild(li)  //.style(`background-image: ${item.logo}`)
+
+
+            
         })
     });    
 }
 
+
+// function mouseEnter() {
+//     let elem = document.querySelector('#lista')
+//     console.log(elem)
+//     elem.querySelector(':nth-child(4)').style.display = 'block';
+    
+//     //document.getElementById(`${item_id}`).style.display = "block";
+// }
 
 async function buscarApiPaginado(){
     const response = await fetch('http://brapi.dev/api/quote/list')
