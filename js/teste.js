@@ -108,6 +108,21 @@ function buscarApi(){
                 //console.log(detalhe)
                 detalhe.style.display = "block";
             });
+
+            li.addEventListener("mouseleave", (e) => {
+                //let elem = document.querySelector('#lista')
+                cardId = e.target.id
+               // console.log(cardId)
+                //let elem = document.querySelector(`#lista #${cardId}`) //.style.display = 'block';
+                let elem = document.getElementById(`${cardId}`)
+               // console.log(elem)
+                detalhe = elem.querySelector(`:nth-child(4)`)
+                //console.log(detalhe)
+                detalhe.style.display = "none";
+            });
+
+
+
             // li.appendChild(sector)
             // li.appendChild(close)
             // li.appendChild(change)
